@@ -1,0 +1,31 @@
+html, body{
+  font-family: 'Quicksand', sans-serif;
+}
+
+.img-pos-3{
+  top: 390px;
+}
+
+.img-pos-4{
+  top: 520px;
+  left: 180px;
+}
+
+/* linhas pares (even) */
+.tabela tbody tr:nth-child(even) {
+    background-color: #CCC;
+}
+/* linhas ímpares (odd) */
+.tabela tbody tr:nth-child(odd) {
+    background-color: #FFF;
+}
+
+.tabela{
+  margin: auto;
+  text-align: center;
+  width: 500px;
+}
+
+.tabela, td, th {
+  border: 1px solid black;
+}

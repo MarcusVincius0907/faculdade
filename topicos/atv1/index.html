@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cGreen: '#55bd91',
+            cWhiteGreen: '#f6fbf9',
+            cGray: '#485a68',
+            cRed: '#f75c5c'
+          },
+         
+        }
+      }
+    }
+  </script>
+
+  <title>Service Dental</title>
+
+</head>
+<body>
+
+  <header class=" bg-cGreen w-100 h-20 ">
+    <div class=" max-w-7xl m-auto  w-full text-white  font-bold flex justify-between h-full">
+      <div class="flex justify-center items-center text-xl  ">
+        <div class="p-2 cursor-pointer hover:opacity-50"> Produtos </div>
+        <div class="p-2 cursor-pointer hover:opacity-50"> Soluções </div>
+        <div class="p-2 cursor-pointer hover:opacity-50"> Preços </div>
+        <div class="p-2 cursor-pointer hover:opacity-50"> Leia </div>
+        <div class="p-2 cursor-pointer hover:opacity-50"> Contato </div>
+      </div>
+      <div class=" flex justify-center items-center">
+        <div class="p-2"> Cel: <a class="opacity-50" href="tel:5511958755705"> +55 (11) 9 5875-5705</a></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- inicio + form -->
+  <section>
+    <div class="max-w-7xl m-auto">
+      <div class=" mt-20 flex"> 
+
+        <!-- left column -->
+        <div class="w-1/2">
+
+          <img src="./imgs/logo.svg" alt="">
+
+          <h1 class=" mt-5  text-cGray text-5xl">Um limpo, conciso headline sobre nossos produtos e serviços.</h1>
+
+          <h3 class="mt-3 text-cGray opacity-80 text-xl">Um ou duas sentenças sobre os benefícios que prestamos suporte. </h3>
+
+          <!-- form -->
+
+          <div class="mt-5">
+            <form action="" class="text-xl text-cGray font-bold flex  ">
+              <!-- Nome Completo, Data de Nascimento, Sexo, CPF, Logradouro, Número do Logradouro, CEP, Cidade e UF -->
+
+              <div class="w-1/2">
+
+                <div class="p-2">
+                  <label for="Name">Nome *</label>
+                  <br>
+                  <input class=" px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="text">
+                </div>
+  
+                <div class="p-2">
+                  <label for="birth">Aniversário *</label>
+                  <br>
+                  <input class=" px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="date">
+                </div>
+  
+                <div class="p-2">
+                  <label for="birth">Sexo *</label>
+                  <br>
+                  <select name="" id="" class=" px-2 py-1 outline-none border-2 rounded-md border-cGreen">
+                    <option value="" selected>Selecione uma opção</option>
+                    <option value="m">Masculino</option>
+                    <option value="f">Feminino</option>
+                  </select>
+                </div>
+  
+                <div class="p-2">
+                  <label for="cpf">CPF *</label>
+                  <br>
+                  <input id="inputCPF" class=" px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="number">
+                </div>
+  
+                <div class="p-2">
+                  <label for="street">Rua *</label>
+                  <br>
+                  <input class="px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="text">
+                </div>
+              </div>
+
+              <!-- form second column  -->
+              <div class="w-1/2">
+
+                <div class="p-2">
+                  <label for="number">Número *</label>
+                  <br>
+                  <input class="px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="number">
+                </div>
+                <div class="p-2">
+                  <label for="zipcode">CEP *</label>
+                  <br>
+                  <input class="px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="number">
+                </div>
+                <div class="p-2">
+                  <label for="city">Cidade</label>
+                  <br>
+                  <input class="px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="text">
+                </div>
+                <div class="p-2">
+                  <label for="state">Estado</label>
+                  <br>
+                  <input class="px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="text">
+                </div>
+                <div class="p-2 mt-3">
+                  <button onclick="enviar()" class="bg-cGreen p-2 hover:opacity-50 font-bold rounded-md text-white w-44"  type="submit">Enviar</button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+
+        </div>
+
+        <!-- right column -->
+        <div class="w-1/2 relative">
+          <div class="absolute left-16 z-10 rounded-md bg-white p-1">
+            <img class="rounded-md" src="./imgs/image1.png" alt="">
+          </div>
+          <div class=" absolute left-52 top-36  rounded-md bg-white p-1">
+            <img class="rounded-md" src="./imgs/image2.png" alt="">
+          </div>
+           <div class="absolute rounded-md bg-white p-1 img-pos-3">
+            <img  class="rounded-md" src="./imgs/image3.png" alt="">
+          </div>
+          
+          <div class="absolute rounded-md bg-white p-1 img-pos-4">
+            <img class="rounded-md" src="./imgs/image4.png" alt="">
+          </div>
+          <!--
+          <div>
+            <img src="./imgs/image5.png" alt="">
+          </div> -->
+        </div>
+      </div>
+    </div>
+      
+      
+  </section>
+
+  <!-- banner -->
+  <section class="mt-20">
+    <img src="./imgs/banner.jpg" alt="">
+  </section>
+
+  <!-- infos empresa -->
+  <section class="bg-cWhiteGreen">
+    <div class="w-full">
+      <div class=" max-w-lg text-center m-auto">
+        <h1 class="pt-20  text-cGray text-5xl">Quais serviços nós oferecemos para nossos clientes?</h1>
+        <h3 class="mt-5 text-cGray opacity-80 text-xl">
+         
+          Como a vida dos usuários vai melhorar com nossos produtos/serviços? Se você conseguir visualizar 5% da insdustria da saúde, irá se convencer de que oferecemos os melhores serviços.
+        </h3>
+      </div>
+
+      <div class="flex p-5 m-auto w-full justify-center py-20">
+
+        <div class=" max-w-4xl">
+
+          <div class=" grid grid-cols-2 grid-rows-2">
+            <div class="flex p-2">
+    
+              <div class="bg-white p-2 border-2 border-cGreen rounded-xl w-36 h-20 flex justify-center items-center">
+                <div><img src="./imgs/icon1.png" alt=""></div>
+              </div>
+      
+              <div class="ml-4">
+                <h3 class="text-cGreen">IMC</h3>
+                <div class="mt-1">O índice de massa corporal é uma medida internacional usada para calcular se uma pessoa está no peso ideal.</div>
+              </div>
+      
+            </div>
+            <div class="flex p-2">
+    
+              <div class="bg-white p-2 border-2 border-cGreen rounded-xl w-36 h-20 flex justify-center items-center">
+                <div><img src="./imgs/icon2.png" alt=""></div>
+              </div>
+      
+              <div class="ml-4">
+                <h3 class="text-cGreen">VISÃO DA EMPRESA</h3>
+                <div class="mt-1">Nossa visão é revolucionar o mercado da saúde bocal através das nossas novas tecnologias e pesquisas.</div>
+              </div>
+      
+            </div>
+            <div class="flex p-2">
+    
+              <div class="bg-white p-2 border-2 border-cGreen rounded-xl w-36 h-20 flex justify-center items-center">
+                <div><img src="./imgs/icon3.png" alt=""></div>
+              </div>
+      
+              <div class="ml-4">
+                <h3 class="text-cGreen">MISSÃO DA EMPRESA</h3>
+                <div class="mt-1">Nossa missão é mudar a sua vida, a sua saúde através do que temos para lhes oferecer de mais recente no mercado</div>
+              </div>
+      
+            </div>
+            <div class="flex p-2">
+    
+              <div class="bg-white p-2 border-2 border-cGreen rounded-xl w-36 h-20 flex justify-center items-center">
+                <div><img src="./imgs/icon4.png" alt=""></div>
+              </div>
+      
+              <div class="ml-4">
+                <h3 class="text-cGreen">NOSSOS VALORES</h3>
+                <div class="mt-1">Temos valores muito consolidados por nossos líderes, honestidade, transparecenia e exelencia.</div>
+              </div>
+      
+            </div>
+          </div>
+  
+          
+  
+         
+  
+        </div>
+  
+        
+
+      </div>
+
+
+
+    </div>
+  </section>
+
+  <!-- IMC -->
+  <section>
+    <h1 class="my-5 mt-20 text-cGray text-5xl text-center">IMC</h1>
+    <div class="p-3 w-full ">
+      
+      <div class="m-auto">
+        <table class="tabela">
+          <thead>
+             <th>IMC</th>
+             <th>CLASSIFICAÇÃO</th>
+             <th>OBESIDADE (GRAU)</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>MENOR QUE 18,5</td>
+              <td>MAGREZA</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>ENTRE 18,5 E 24,9</td>
+              <td>NORMAL</td>
+              <td>0</td>
+            </tr>
+            <tr>
+              <td>ENTRE 25,0 E 29,9</td>
+              <td>SOBREPESO</td>
+              <td>I</td>
+            </tr>
+            <tr>
+              <td>ENTRE 30,0 E 39,9 </td>
+              <td>OBESIDADE</td>
+              <td>II</td>
+            </tr>
+            <tr>
+              <td>MAIOR QUE 40,0 </td>
+              <td>OBESIDADE GRAVE</td>
+              <td>III</td>
+            </tr>
+            
+            
+          </tbody>
+        </table>
+      </div>
+
+
+      
+      <div class="flex justify-center mt-5">
+        
+        <form class="flex justify-center flex-col items-center">
+          <h3 class="mt-3 text-cGray opacity-80 text-xl">Para calcular seu IMC digite a altura e peso corretamente. </h3>
+          <div class="p-2">
+            <label for="altura">Altura *</label>
+            <br>
+            <input id="inputAltura" placeholder="0,0" step="0.00" class="px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="number">
+          </div>
+  
+          <div class="p-2">
+            <label for="peso">Peso *</label>
+            <br>
+            <input id="inputPeso" placeholder="0,0" step="0.00" class="px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="number">
+          </div>
+        
+          <div class="p-2 mt-3 flex justify-center">
+            <button class="bg-cGreen p-2 hover:opacity-50 font-bold rounded-md text-white w-44" onclick="calcularIMC()" type="submit">Calcular</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- maps -->
+  <section class="bg-cWhiteGreen mt-20">
+    <h1 class="py-5  text-cGray text-5xl text-center">Venha nos visitar!</h1>
+    <div class="p-5 pb-10">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3655.0560714674816!2d-46.73489209999999!3d-23.638162899999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce514248f22e0b%3A0xc6b85758668d9118!2sR.%20Almaden%2C%20130%20-%20Vila%20Andrade%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2005717-200!5e0!3m2!1spt-BR!2sbr!4v1647959168905!5m2!1spt-BR!2sbr" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <footer class="bg-white h-20">
+    <div class=" mt-10 border-t-2 border-gray-100 p-7">
+      <div class="p-3 flex justify-between">
+        <div>
+          <img src="./imgs/logo.svg" alt="">
+        </div>
+        <div class="flex justify-center items-center">
+          Rua João Batista Marcondes 130, Vila Prel, SP. 05717-200
+        </div>
+        <div class="flex justify-center items-center">
+          <div class=" flex justify-center items-center">
+            <div class="p-2"> Cel: <a class="opacity-50" href="tel:5511958755705"> +55 (11) 9 5875-5705</a></div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </footer>
+
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="./main.js"></script>
+</body>
+</html>
