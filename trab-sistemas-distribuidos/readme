@@ -1,0 +1,11 @@
+
+## Para excutar
+
+# OBS: é necessário a instalação do node.js
+Basta entrar na pasta server e clicar em executeme.bat ou abra a pasta no cmd e digite "npm start".
+Abra client/index.html no seu navegador.
+
+## O Processo
+1 - ao clicar em "=" na interface, em client/main.js a função compute() fará uma requisição ao servidor enviando valor 1, valor 2 e operação;
+2 - em server/index.js o servidor receberá a requisição, executará a operação e devolverá o resultado;  
+3 - o cliente receberá a resposta do servidor e exibirá na tela.
