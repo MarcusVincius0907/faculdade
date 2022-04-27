@@ -22,22 +22,58 @@ function list(){
   return db.data;
 }
 
-function updateDB(db){
-  let newDb = JSON.stringify(db);
-  fs.writeFile('./server/db.json', newDb, 'utf8', (err) => {console.log(err);} );
+function remove(clienteName){
+  db.data = db.data.filter(el => el.nome != clienteName);
+  updateDB(db);
+  return db.data;
+
 }
 
-io.on('connection', (socket) => {
-  console.log('a user connected');
-  socket.on('add', (client) => {
-    console.log('receive client', client);
-    io.emit("addStatus", {status: 'success', data:add(client)})
-  })
-  socket.on('list', (client) => {
-    console.log('wanna list');
-    io.emit('listStatus', {data:list()})
-  })
-});
+async function updateDB(db){
+  let newDb = JSON.stringify(db);
+  try{
+    
+    await new Promise((res, rej) => {
+      setTimeout(() => {
+        fs.writeFile('./server/db.json', newDb, 'utf8', (err) => {
+          if(err){
+            console.log('error saving file', err);
+          }
+        } );
+        res(true);
+      });
+    }) 
+    
+  
+  }catch(e){
+    console.log('error saving data in db');
+  }
+}
+
+function startSocket(){
+  try{
+    io.on('connection', (socket) => {
+      console.log('a user connected');
+      socket.on('add', (client) => {
+        console.log('receive client', client);
+        io.emit("addStatus", {status: 'success', data:add(client)})
+      })
+      socket.on('list', (client) => {
+        console.log('wanna list');
+        io.emit('listStatus', {status: 'success',data:list()})
+      })
+      socket.on('remove', (client) => {
+        console.log('wanna remove', client);
+        io.emit('removeStatus', {status: 'success', data:remove(client.data)});
+      })
+    });
+  }catch(e){
+    console.log(e);
+    startSocket()
+  }
+}
+
+startSocket()
 
 server.listen(3000, () => {
   console.log('listening on *:3000');

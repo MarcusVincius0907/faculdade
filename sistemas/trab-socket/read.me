@@ -1,0 +1,15 @@
+# Repo: https://github.com/MarcusVincius0907/faculdade/tree/main/sistemas/trab-socket
+
+## Para excutar
+
+# OBS: é necessário a instalação do node.js
+1. Basta entrar na pasta server e clicar em executeme.bat ou abra a pasta no cmd e digite "npm start".
+2. Abra client/index.html no seu navegador.
+
+## O Processo
+1 - (Interface) O sistema possui 3 tabs. 
+  "Listar" -> lista os usuários criados em uma tabela com seus respectivos dados. 
+  "Adicionar" -> para adicionar um cliente com nome, cpf e endereco.
+  "Remover" -> um input select para selecionar o nome do cliente a ser removido.
+2 - em server/index.js o servidor receberá a solicitação e abrira a conexão socket.
+3 - a comunicação implica entre os "emits" e "ons" tanto do lado do cliente quanto servidor no qual eles transitam dados pelo socket.
