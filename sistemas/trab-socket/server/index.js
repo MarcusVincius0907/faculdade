@@ -8,6 +8,8 @@ const path = require('path')
 const fs = require('fs')
 let db = require('./db.json')
 
+console.log('iniciando...');
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client', 'index.html'));
 });
@@ -53,17 +55,13 @@ async function updateDB(db){
 function startSocket(){
   try{
     io.on('connection', (socket) => {
-      console.log('a user connected');
       socket.on('add', (client) => {
-        console.log('receive client', client);
         io.emit("addStatus", {status: 'success', data:add(client)})
       })
       socket.on('list', (client) => {
-        console.log('wanna list');
         io.emit('listStatus', {status: 'success',data:list()})
       })
       socket.on('remove', (client) => {
-        console.log('wanna remove', client);
         io.emit('removeStatus', {status: 'success', data:remove(client.data)});
       })
     });
