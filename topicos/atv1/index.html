@@ -66,7 +66,7 @@
           <!-- form -->
 
           <div class="mt-5">
-            <form action="" class="text-xl text-cGray font-bold flex  ">
+            <form id="form" onsubmit="submitData()" class="text-xl text-cGray font-bold flex  ">
               <!-- Nome Completo, Data de Nascimento, Sexo, CPF, Logradouro, Número do Logradouro, CEP, Cidade e UF -->
 
               <div class="w-1/2">
@@ -75,6 +75,12 @@
                   <label for="Name">Nome *</label>
                   <br>
                   <input class=" px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="text">
+                </div>
+
+                <div class="p-2">
+                  <label for="Email">Email *</label>
+                  <br>
+                  <input class=" px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="email">
                 </div>
   
                 <div class="p-2">
@@ -88,8 +94,8 @@
                   <br>
                   <select name="" id="" class=" px-2 py-1 outline-none border-2 rounded-md border-cGreen">
                     <option value="" selected>Selecione uma opção</option>
-                    <option value="m">Masculino</option>
-                    <option value="f">Feminino</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Feminino</option>
                   </select>
                 </div>
   
@@ -99,38 +105,39 @@
                   <input id="inputCPF" class=" px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="number">
                 </div>
   
-                <div class="p-2">
-                  <label for="street">Rua *</label>
-                  <br>
-                  <input class="px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="text">
-                </div>
+                
               </div>
 
               <!-- form second column  -->
               <div class="w-1/2">
-
-                <div class="p-2">
-                  <label for="number">Número *</label>
-                  <br>
-                  <input class="px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="number">
-                </div>
                 <div class="p-2">
                   <label for="zipcode">CEP *</label>
                   <br>
                   <input class="px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="number">
                 </div>
                 <div class="p-2">
-                  <label for="city">Cidade</label>
+                  <label for="number">Número *</label>
+                  <br>
+                  <input class="px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="number">
+                </div>
+                
+                <div class="p-2">
+                  <label for="street">Rua *</label>
                   <br>
                   <input class="px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="text">
                 </div>
                 <div class="p-2">
-                  <label for="state">Estado</label>
+                  <label for="city">Cidade *</label>
+                  <br>
+                  <input class="px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="text">
+                </div>
+                <div class="p-2">
+                  <label for="state">Estado *</label>
                   <br>
                   <input class="px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="text">
                 </div>
                 <div class="p-2 mt-3">
-                  <button onclick="enviar()" class="bg-cGreen p-2 hover:opacity-50 font-bold rounded-md text-white w-44"  type="submit">Enviar</button>
+                  <button  class="bg-cGreen p-2 hover:opacity-50 font-bold rounded-md text-white w-44"  type="submit">Enviar</button>
                 </div>
               </div>
 

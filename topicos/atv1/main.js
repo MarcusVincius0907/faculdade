@@ -77,3 +77,56 @@ function enviar(){
 
 
 /* CPF validation */
+
+
+/* API */
+const API_URL = 'https://app.professordaniloalves.com.br/api/v1';
+
+const form = document.querySelector('#form');
+
+async function submitData(){
+  const data = {
+    nomeCompleto: form[0].value,
+    email: form[1].value,
+    dataNascimento: form[2].value,
+    sexo: form[3].value,
+    cpf: form[4].value,
+    cep: form[5].value,
+    numeroLogradouro: form[6].value,
+    logradouro: form[7].value,
+    cidade: form[8].value,
+    uf: form[9].value,
+  }
+  console.log(data);
+  try{
+    
+    const resp = await fetch(`${API_URL}/cadastro`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN':' '
+      },
+    })
+    .then(res => {
+      if(res.ok){
+        return res.json()
+      }
+      return Promise.reject(res)
+    })
+  
+    const content =  resp
+  
+    console.log('content',content );
+  }catch(e){
+    const errorResp = await e.json()
+    console.log('error ', errorResp);
+    Swal.fire(`Erro!`, `${errorResp.message} `, 'error')
+  }
+
+  
+  
+  
+}
+
