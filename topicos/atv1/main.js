@@ -98,7 +98,7 @@ const formFields = [
 ]
 
 async function submitData(){
-  
+
   resetErrorsInput();
 
   const data = {
@@ -148,7 +148,6 @@ async function submitData(){
   }
 
 }
-
 
 function setErrorsInput(errors){
 
@@ -206,4 +205,45 @@ function resetErrorsInput(){
   inputBorder.classList.add('border-cGreen')
   inputBorder.classList.remove('border-red-500')
  })
+}
+
+/* CEP */
+
+function getAddress(){
+  const cep = form[5].value;
+
+  if(!cep) return;
+
+  try{
+    
+    const resp = await fetch(`${API_URL}/endereco/${cep}`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN':' '
+      },
+    })
+    .then(res => {
+      if(res.ok){
+        return res.json()
+      }
+      return Promise.reject(res)
+    })
+
+    console.log(resp);
+    Swal.fire(`Sucesso!`, `${resp.message} `, 'success')
+  
+  }catch(e){
+
+    const errorResp = await e.json()
+
+    console.log('error ', errorResp);
+
+    if(errorResp && errorResp.errors) setErrorsInput(errorResp.errors);
+
+    Swal.fire(`Erro!`, `${errorResp.message} `, 'error')
+
+  }
+
 }
