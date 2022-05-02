@@ -71,25 +71,31 @@
 
               <div class="w-1/2">
 
-                <div class="p-2">
+                <div class="p-2 nomeCompleto">
                   <label for="Name">Nome *</label>
                   <br>
                   <input class=" px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="text">
+                  <br>
+                  <span class=" text-red-500 text-sm  hidden">error here</span>
                 </div>
 
-                <div class="p-2">
+                <div class="p-2 email">
                   <label for="Email">Email *</label>
                   <br>
                   <input class=" px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="email">
+                  <br>
+                  <span class=" text-red-500 text-sm  hidden">error here</span>
                 </div>
   
-                <div class="p-2">
+                <div class="p-2 dataNascimento">
                   <label for="birth">Aniversário *</label>
                   <br>
                   <input class=" px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="date">
+                  <br>
+                  <span class=" text-red-500 text-sm  hidden">error here</span>
                 </div>
   
-                <div class="p-2">
+                <div class="p-2 sexo">
                   <label for="birth">Sexo *</label>
                   <br>
                   <select name="" id="" class=" px-2 py-1 outline-none border-2 rounded-md border-cGreen">
@@ -97,12 +103,16 @@
                     <option value="M">Masculino</option>
                     <option value="F">Feminino</option>
                   </select>
+                  <br>
+                  <span class=" text-red-500 text-sm  hidden">error here</span>
                 </div>
   
-                <div class="p-2">
+                <div class="p-2 cpf">
                   <label for="cpf">CPF *</label>
                   <br>
                   <input id="inputCPF" class=" px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="number">
+                  <br>
+                  <span class=" text-red-500 text-sm  hidden">error here</span>
                 </div>
   
                 
@@ -110,31 +120,41 @@
 
               <!-- form second column  -->
               <div class="w-1/2">
-                <div class="p-2">
+                <div class="p-2 cep">
                   <label for="zipcode">CEP *</label>
                   <br>
                   <input class="px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="number">
+                  <br>
+                  <span class=" text-red-500 text-sm  hidden">error here</span>
                 </div>
-                <div class="p-2">
+                <div class="p-2 numeroLogradouro">
                   <label for="number">Número *</label>
                   <br>
                   <input class="px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="number">
+                  <br>
+                  <span class=" text-red-500 text-sm  hidden">error here</span>
                 </div>
                 
-                <div class="p-2">
+                <div class="p-2 logradouro">
                   <label for="street">Rua *</label>
                   <br>
                   <input class="px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="text">
+                  <br>
+                  <span class=" text-red-500 text-sm  hidden">error here</span>
                 </div>
-                <div class="p-2">
+                <div class="p-2 cidade">
                   <label for="city">Cidade *</label>
                   <br>
                   <input class="px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="text">
+                  <br>
+                  <span class=" text-red-500 text-sm  hidden">error here</span>
                 </div>
-                <div class="p-2">
+                <div class="p-2 uf">
                   <label for="state">Estado *</label>
                   <br>
                   <input class="px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="text">
+                  <br>
+                  <span class=" text-red-500 text-sm  hidden">error here</span>
                 </div>
                 <div class="p-2 mt-3">
                   <button  class="bg-cGreen p-2 hover:opacity-50 font-bold rounded-md text-white w-44"  type="submit">Enviar</button>
@@ -312,6 +332,7 @@
             <label for="altura">Altura *</label>
             <br>
             <input id="inputAltura" placeholder="0,0" step="0.00" class="px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="number">
+            <span class=" text-red-500 text-sm  hidden">error here</span>
           </div>
   
           <div class="p-2">
