@@ -2,6 +2,9 @@ document.body.addEventListener("submit", function(event){
   event.preventDefault()
 });
 
+function init(){
+  renderUFList()
+}
 
 /* IMC logic */
 const inputAltura = document.querySelector('#inputAltura')
@@ -84,7 +87,7 @@ const API_URL = 'https://app.professordaniloalves.com.br/api/v1';
 
 const form = document.querySelector('#form');
 
-const formFields = [
+const formFields1 = [
   'nomeCompleto',
   'email',
   'dataNascimento',
@@ -99,7 +102,12 @@ const formFields = [
 
 async function submitData(){
 
-  resetErrorsInput();
+  if(!form[10].checked){
+    Swal.fire(`Atenção!`, `Você deve aceitar os termos para proceguir `, 'warning')
+    return;
+  }
+
+  resetErrorsInput(formFields1);
 
   const data = {
     nomeCompleto: form[0].value,
@@ -113,7 +121,6 @@ async function submitData(){
     cidade: form[8].value,
     uf: form[9].value,
   }
-  console.log(data);
   try{
     
     const resp = await fetch(`${API_URL}/cadastro`, {
@@ -132,8 +139,8 @@ async function submitData(){
       return Promise.reject(res)
     })
 
-    console.log(resp);
     Swal.fire(`Sucesso!`, `${resp.message} `, 'success')
+    form.reset()
   
   }catch(e){
 
@@ -152,18 +159,17 @@ async function submitData(){
 function setErrorsInput(errors){
 
   for (var [key, value] of Object.entries(errors)) {
-    console.log(key + ' ' + value); // "a 5", "b 7", "c 9"
 
     let msgs = ''
     value.forEach(msg => {
       msgs += msg
     });
 
-    const spanError = document.querySelector(`.${key} > span`);
+    const spanError = document.querySelector(`.${key} > .errorMsg`);
     spanError.classList.remove('hidden');
     spanError.innerHTML = msgs;
 
-    const inputBorder = document.querySelector(`.${key} > input`)? document.querySelector(`.${key} > input`) : document.querySelector(`.${key} > select`)
+    const inputBorder = document.querySelector(`.${key} > div > input`)? document.querySelector(`.${key} > div > input`) : document.querySelector(`.${key} > select`)
     inputBorder.classList.remove('border-cGreen')
     inputBorder.classList.add('border-red-500')
 
@@ -196,12 +202,12 @@ function setErrorsInput(errors){
   if(errors.uf); */
 }
 
-function resetErrorsInput(){
+function resetErrorsInput(formFields){
  formFields.forEach(el => {
-  const spanError = document.querySelector(`.${el} > span`);
+  const spanError = document.querySelector(`.${el} > .errorMsg`);
   spanError.classList.add('hidden');
 
-  const inputBorder = document.querySelector(`.${el} > input`)? document.querySelector(`.${el} > input`) : document.querySelector(`.${el} > select`)
+  const inputBorder = document.querySelector(`.${el} > div > input`)? document.querySelector(`.${el} > div > input`) : document.querySelector(`.${el} > select`)
   inputBorder.classList.add('border-cGreen')
   inputBorder.classList.remove('border-red-500')
  })
@@ -209,7 +215,7 @@ function resetErrorsInput(){
 
 /* CEP */
 
-function getAddress(){
+async function getAddress(){
   const cep = form[5].value;
 
   if(!cep) return;
@@ -231,9 +237,94 @@ function getAddress(){
       return Promise.reject(res)
     })
 
-    console.log(resp);
-    Swal.fire(`Sucesso!`, `${resp.message} `, 'success')
+    Swal.fire(`Sucesso!`, `CEP encontrado! `, 'success')
+    form[7].value = resp.logradouro
+    form[8].value = resp.localidade
+    form[9].value = resp.uf
+
   
+  }catch(e){
+
+    const errorResp = await e.json()
+
+    console.log('error ', errorResp);
+
+    Swal.fire(`Erro!`, `${errorResp.message} `, 'error')
+
+  }
+
+}
+
+async function renderUFList(){
+  try{
+    
+    const resp = await fetch(`${API_URL}/endereco/estados`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN':' '
+      },
+    })
+    .then(res => {
+      if(res.ok){
+        return res.json()
+      }
+      return Promise.reject(res)
+    })
+
+    let elements = `<option value="" selected>Selecione uma opção</option>`;
+    resp.forEach(el => {
+      elements += `<option value="${el.uf}">${el.nome}</option>` 
+    }) 
+    
+    form[9].innerHTML = elements;
+
+  }catch(e){
+
+    const errorResp = await e.json()
+
+    Swal.fire(`Erro!`, `${errorResp.message} `, 'error')
+
+  }
+}
+
+/* IMC API */
+const imcForm = document.querySelector('#imcForm');
+const formFields2 = [
+  'altura',
+  'peso',
+  
+]
+
+async function sendIMCData(){
+  resetErrorsInput(formFields2)
+  try{
+
+    const data = {
+      altura: imcForm[0].value,
+      peso: imcForm[1].value
+    }
+    
+    const resp = await fetch(`${API_URL}/imc/calcular`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN':' '
+      },
+    })
+    .then(res => {
+      if(res.ok){
+        return res.json()
+      }
+      return Promise.reject(res)
+    })
+
+    Swal.fire(`Sucesso!`, `${resp.message} `, 'success')
+    
+
   }catch(e){
 
     const errorResp = await e.json()
@@ -245,5 +336,7 @@ function getAddress(){
     Swal.fire(`Erro!`, `${errorResp.message} `, 'error')
 
   }
-
 }
+
+/* init */
+init()
