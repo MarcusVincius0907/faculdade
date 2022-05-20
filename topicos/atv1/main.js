@@ -102,8 +102,14 @@ const formFields1 = [
 
 async function submitData(){
 
-  if(!form[10].checked){
+  if(!form[11].checked){
     Swal.fire(`Atenção!`, `Você deve aceitar os termos para proceguir `, 'warning')
+    return;
+  }
+
+  //possui id
+  if(form[10].value && isEditting){
+    editarCadastro();
     return;
   }
 
@@ -336,6 +342,176 @@ async function sendIMCData(){
     Swal.fire(`Erro!`, `${errorResp.message} `, 'error')
 
   }
+}
+
+/* CPF validation */
+
+let isEditting = false;
+
+async function checkCPF(){
+  const cpf = form[4].value;
+  if(!cpf || isEditting) return;
+
+  try{
+    
+    const resp = await fetch(`${API_URL}/cadastro/${cpf}`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN':' '
+      },
+    })
+    .then(res => {
+      if(res.ok){
+        return res.json()
+      }
+      return Promise.reject(res)
+    })
+
+    modalCPFCadastrado(resp);
+  
+  }catch(e){
+
+    const errorResp = await e.json()
+
+    if(errorResp.message === "Documento não cadastrado") return;
+
+    console.log('error ', errorResp);
+
+    Swal.fire(`Erro!`, `${errorResp.message} `, 'error')
+
+  }
+
+}
+
+const modalCPFCadastrado = (userData) => {
+  Swal.fire({
+    title: 'Esse CPF já foi cadastrado!',
+    html:'<p>Nesse caso, você pode excluir ou editar seus dados.</p>',
+    showDenyButton: true,
+    confirmButtonText: 'Editar',
+    denyButtonText: 'Excluir',
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      // editar dados
+      modoEditar(userData);
+    } else if (result.isDenied) {
+      // Excluir dados
+      excluirCadastro(userData.cpf);
+    } else if (result.isDismissed){
+      modalCPFCadastrado(userData);
+    }
+  })
+}
+
+const excluirCadastro = async (cpf) => {
+  if(!cpf) return;
+
+  try{
+    
+    const resp = await fetch(`${API_URL}/cadastro/${cpf}`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN':' '
+      },
+    })
+    .then(res => {
+      if(res.ok){
+        return;
+      }
+      return Promise.reject(res)
+    })
+
+    Swal.fire(`Sucesso!`, `Dados deletados com sucesso! `, 'success')
+    form.reset();
+  
+  }catch(e){
+
+    console.log(e);
+
+    const errorResp = await e.json()
+
+    console.log('error ', errorResp);
+
+    Swal.fire(`Erro!`, `${errorResp.message} `, 'error')
+
+  }
+}
+
+
+const editarCadastro = async() => {
+
+  try{
+
+    resetErrorsInput(formFields1);
+
+    const data = {
+      nomeCompleto: form[0].value,
+      email: form[1].value,
+      dataNascimento: form[2].value,
+      sexo: form[3].value,
+      cpf: form[4].value,
+      cep: form[5].value,
+      numeroLogradouro: form[6].value,
+      logradouro: form[7].value,
+      cidade: form[8].value,
+      uf: form[9].value,
+      id: form[10].value,
+    }
+
+    const resp = await fetch(`${API_URL}/cadastro`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN':' '
+      },
+    })
+    .then(res => {
+      if(res.ok){
+        return res.json()
+      }
+      return Promise.reject(res)
+    })
+
+    isEditting = false;
+    form.reset();
+    Swal.fire(`Sucesso!`, `Dados editados com sucesso! `, 'success')
+  
+  }catch(e){
+
+    const errorResp = await e.json()
+
+    console.log('error ', errorResp);
+
+    if(errorResp && errorResp.errors) setErrorsInput(errorResp.errors);
+
+    Swal.fire(`Erro!`, `${errorResp.message} `, 'error')
+
+  }
+}
+
+const modoEditar = (data) => {
+ 
+  form[0].value = data.nomeCompleto,
+  form[1].value = data.email,
+  form[2].value = data.dataNascimento,
+  form[3].value = data.sexo,
+  form[4].value = data.cpf,
+  form[5].value = data.cep,
+  form[6].value = data.numeroLogradouro,
+  form[7].value = data.logradouro,
+  form[8].value = data.cidade,
+  form[9].value = data.uf,
+  form[10].value = data.id
+
+  isEditting = true;
+  
 }
 
 /* init */

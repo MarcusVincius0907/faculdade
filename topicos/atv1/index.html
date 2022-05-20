@@ -112,7 +112,7 @@
                 <div class="p-2 cpf">
                   <label for="cpf">CPF *</label>
                   
-                  <div> <input id="inputCPF" class=" px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="number"></div>
+                  <div> <input onfocusout="checkCPF()" id="inputCPF" class=" px-2 py-1 outline-none border-2 rounded-md border-cGreen" type="number"></div>
                   
                   <div class=" errorMsg text-red-500 text-sm  hidden">error here</div>
                 </div>
@@ -166,6 +166,7 @@
                   
                   <div class=" errorMsg text-red-500 text-sm  hidden">error here</div>
                 </div>
+                <input type="hidden" name="idUsuario">
                 <div class="p-2 mt-3">
                   <div>
                     <input type="checkbox" name="chTerms" id="chTerms">
