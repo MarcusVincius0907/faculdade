@@ -1,7 +1,10 @@
 const express = require('express');
 const cors = require("cors");
 const app = express()
+const path = require('path');
 const PORT = process.env.PORT || 3000;
+
+app.use('/static', express.static(__dirname + '/client/static'))
 
 app.listen(PORT, () => {
   console.log(`o servidor está de pé em: http://localhost:${PORT}`)
@@ -43,5 +46,5 @@ app.post('/calculate', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-  res.sendFile('./index.html')
+  res.sendFile(path.join(__dirname, './client/' + 'index.html'))
 })

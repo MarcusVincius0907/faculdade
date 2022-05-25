@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+service CalcService {
+    rpc Calc (CalcRequest) returns (CalcResponse) {}
+}
+
+message CalcRequest {
+   string operation = 1;
+   string firstNumber = 2;
+   string secondNumber = 3;
+}
+
+message CalcResponse {
+   string result = 1;
+}
