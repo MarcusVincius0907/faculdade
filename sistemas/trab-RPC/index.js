@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require("cors");
 const app = express()
 const path = require('path');
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 app.use('/static', express.static(__dirname + '/client/static'))
 
@@ -44,6 +44,8 @@ app.post('/calculate', (req, res) => {
   
 
 })
+
+
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, './client/' + 'index.html'))

@@ -5,13 +5,19 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.1143.0",
+    "browserify": "^17.0.0",
     "cors": "^2.8.5",
     "express": "^4.18.1",
-    "grpc": "^1.24.11"
+    "grpc": "^1.24.11",
+    "mock-aws-s3": "^4.0.2",
+    "nock": "^13.2.4",
+    "node-pre-gyp": "^0.17.0",
+    "nodemon": "^2.0.16"
   }
 }
