@@ -1,10 +1,22 @@
 const grpc = require('grpc')
-const calcProto = grpc.load('./client/static/calc.proto')
+const calcProto = grpc.load('./client/calc.proto')
 
 function calc(call, callback) {
     console.log('server request: ',call.request);
-    const result = "0";
-    callback(null, {result});
+    let result = null;
+    if(call.request && call.request.operation && call.request.firstNumber && call.request.secondNumber){
+        if(call.request.operation === '+'){
+            result = Number(call.request.firstNumber) + Number(call.request.secondNumber)
+        }else if(call.request.operation === '-'){
+            result = Number(call.request.firstNumber) - Number(call.request.secondNumber)
+        }else if(call.request.operation === '*'){
+            result = Number(call.request.firstNumber) * Number(call.request.secondNumber)
+        }else if(call.request.operation === '/'){
+            result = Number(call.request.firstNumber) / Number(call.request.secondNumber)
+        }
+    }
+    
+    callback(null, {result: `${result}`});
 }
 
 const server = new grpc.Server();

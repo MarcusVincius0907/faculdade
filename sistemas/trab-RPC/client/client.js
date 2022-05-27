@@ -1,4 +1,5 @@
 const readline = require('readline')
+const {calculate} = require('./rpc');
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -8,8 +9,17 @@ const rl = readline.createInterface({
 
 async function main(){
   console.log('Iniciando o programa.');
-  const status = await askQuestions();
-  console.log('Finalizando o programa com:', status);
+  askQuestions()
+  .then(res => {
+    console.log(res);
+    console.log('Finalizando o programa com sucesso');
+    rl.close();
+  })
+  .catch(err => {
+    console.log('Finalizando o programa com erro: ', err);
+    rl.close();
+  })
+  
 }
 
 async function askQuestions(){
@@ -20,8 +30,8 @@ async function askQuestions(){
       const operations = ['+', '-', '*', '/'];
   
       let operation = null;
-      let value1 = null;
-      let value2 = null;
+      let firstNumber = null;
+      let secondNumber = null;
   
       const question1 = `Digite a operação
         "+" => soma
@@ -45,7 +55,8 @@ async function askQuestions(){
         })
   
         if(!inputIsValid) {
-          throw `O valor digitado não é uma operação ${input1}`
+          rej(`O valor digitado não é uma operação ${input1}`);
+          return;
         }
   
         operation = input1;
@@ -53,21 +64,26 @@ async function askQuestions(){
         rl.question(question2, (input2) => {
   
           if(isNaN(input2)){
-            throw  `O valor digitado não é um número ${input2}`
+            rej(`O valor digitado não é um número ${input2}`);
+            return;
           }
       
-          value1 = input2;
+          firstNumber = input2;
   
-          rl.question(question3, (input3) => {
+          rl.question(question3, async (input3) => {
         
             if(isNaN(input3)){
-              throw `O valor digitado não é um número ${input3}`
+              rej(`O valor digitado não é um número ${input3}`);
+              return;
             }
         
-            value2 = input3;
+            secondNumber = input3;
+            
+            //calling RPC function
+            const resp = await calculate({operation, firstNumber: `${firstNumber}`, secondNumber: `${secondNumber}`});
         
             rl.close();
-            res('sucesso');
+            res('Resultado: ' + resp);
           });
       
       
@@ -80,13 +96,13 @@ async function askQuestions(){
       
   
     }catch(e){
-      console.log(`Houve uma falha no programa: `, e);
-      res('erro')
+      rej(`Falha no processo ${e}`)
     }
   })
 
   
 
 }
+
 
 main();
