@@ -1,0 +1,34 @@
+# Repo: https://github.com/MarcusVincius0907/faculdade/tree/main/sistemas/trab-RPC
+
+## Para excutar
+
+# OBS: é necessário a instalação do node.js
+1. SERVIDOR: Basta clicar em execute-server.bat ou abra a pasta server no cmd e digite "npm run grpc-server".
+2. CLIENTE: Basta clicar em execute-client.bat ou abra a pasta server no cmd e digite "npm run grpc-client".
+
+## O Processo
+Estou utilizando a lib gRPC, é uma estrutura de chamada de procedimento remoto (RPC)
+de código aberto e de alto desempenho moderna que pode ser executada em qualquer ambiente.
+
+A estrutura do gRPC utiliza um arquivo .proto que serve como "assinatura" do que vai ser solicitado 
+ao servidor e o que será respondido.
+
+SERVIDOR:
+Em rpc.js basicamente é adicionado um serviço, que consta no arquivo .proto.
+E então é criado o servidor, disponibilizando uma porta para o serviço.
+
+Ao iniciar o serviço, é passado também uma função que será executada ao receber
+a chamada do cliente. Que no caso é a função "calc(call, callback)". O parâmetro 
+call traz as informações solicitadas pelo cliente dentro da assinatura. E o parâmetro
+callback é uma função de retorno para o cliente, baseando-se no response da assinatura.
+
+Resumindo, o cliente chama o serviço que invoca a função "calc(call, callback)", que
+por sua vez realiza o calculo matemático e retorna o resultado.
+
+CLIENTE:
+Em ./client/rpc.js existe a responsabilidade da chamada do serviço gRPC na porta disponibilizada.
+Esse arquivo exporta a função "calculate(data)", que recebe como parâmetro um objeto com os seguintes
+atributos: operation (operação matemática), firstNumber, secondNumber.
+
+Em ./client/client.js ocorre a interface textual para inserção dos dados, que ao receber os inputs e
+validá-los, invoca a função "calculate(data)" passando como parâmetro os valores digitados pelos usuário.

@@ -1,5 +1,5 @@
 const grpc = require('grpc')
-const calcProto = grpc.load('./client/calc.proto')
+const calcProto = grpc.load('./protos/calc.proto')
 
 function calc(call, callback) {
     console.log('server request: ',call.request);

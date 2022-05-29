@@ -1,5 +1,5 @@
 const grpc = require('grpc')
-const PROTO_PATH = './client/calc.proto'
+const PROTO_PATH = './protos/calc.proto'
 const CalcService = grpc.load(PROTO_PATH).CalcService
 
 const client = new CalcService('localhost:50051', grpc.credentials.createInsecure());
